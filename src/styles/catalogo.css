@@ -140,3 +140,9 @@
 .variantes li { display: flex; justify-content: space-between; gap: 10px; }
 .variantes a { color: var(--accent2); }
 .variantes s { color: var(--muted); font-size: 12px; }
+
+/* Tocar la foto o el nombre abre el detalle */
+.arte { cursor: pointer; }
+.titulo-btn { all: unset; cursor: pointer; display: block; }
+.titulo-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; border-radius: 4px; }
+.titulo-btn:hover { text-decoration: underline; text-underline-offset: 3px; }

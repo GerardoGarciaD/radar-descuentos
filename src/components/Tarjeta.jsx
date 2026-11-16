@@ -11,18 +11,18 @@ export default function Tarjeta({ p, esFavorito, enComparar, onFavorito, onCompa
 
   return (
     <article className="tarjeta" id={`p-${p.id}`} style={{ "--c": COLOR_NIVEL[p.nivel] }}>
-      <div className="arte">
+      <div className="arte" onClick={() => onDetalle(p.id)} role="presentation">
         {p.imagen && !sinFoto ? <img onError={() => setSinFoto(true)} className="foto" src={p.imagen} alt={`${nombreCorto(p.nombre)} en ${p.color_mostrado}`} loading="lazy" referrerPolicy="no-referrer" /> : <IconoPrenda categoria={p.categoria} />}
         {p.descuento > 0 && <span className="descuento">−{p.descuento}%</span>}
         {p.destacado && <span className="destacada" title="Mejor compra">★<span className="destacada-txt"> Mejor compra</span></span>}
-        <button className="favorito" aria-pressed={esFavorito} aria-label={esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"} onClick={() => onFavorito(p.id)}>
+        <button className="favorito" aria-pressed={esFavorito} aria-label={esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"} onClick={(e) => { e.stopPropagation(); onFavorito(p.id); }}>
           {esFavorito ? "♥" : "♡"}
         </button>
       </div>
 
       <div className="cuerpo">
         <div className="marca">{p.marca} · {p.tienda}{p.genero !== "unisex" ? ` · ${p.genero}` : ""}</div>
-        <h3>{nombreCorto(p.nombre)}</h3>
+        <h3><button className="titulo-btn" onClick={() => onDetalle(p.id)}>{nombreCorto(p.nombre)}</button></h3>
         <div className="precio">
           {p.precio_es_desde && <span className="desde">desde</span>}
           <span className="ahora">{dinero(p.precio)}</span>
