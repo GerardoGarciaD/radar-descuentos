@@ -1,0 +1,57 @@
+/* Portada con aurora y nieve */
+.portada {
+  position: relative;
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r));
+  padding: 44px var(--gutter-r) 30px var(--gutter-l);
+  overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+}
+.cielo {
+  position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgba(31,78,121,.22), transparent 70%),
+    radial-gradient(50% 45% at 75% 0%, rgba(200,16,46,.12), transparent 70%),
+    radial-gradient(70% 60% at 50% 120%, rgba(31,78,121,.10), transparent 70%),
+    var(--bg);
+}
+.cielo::after {
+  content: ""; position: absolute; inset: -20% -10% 30%;
+  background: linear-gradient(100deg, transparent 20%, rgba(31,78,121,.14) 38%, rgba(200,16,46,.10) 55%, transparent 75%);
+  filter: blur(30px); transform-origin: 50% 0; animation: aurora 14s ease-in-out infinite alternate;
+}
+@keyframes aurora { from { transform: skewX(-12deg) translateX(-8%); } to { transform: skewX(10deg) translateX(8%); } }
+.nieve { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.portada-in { max-width: 1180px; margin: 0 auto; display: grid; gap: 18px; position: relative; }
+
+.refran { display: grid; gap: 2px; max-width: 46ch; }
+.refran em { font-style: normal; font-family: var(--f-display); font-weight: 500; font-size: 13px; color: var(--warm); }
+.refran small { color: var(--muted); font-size: 13px; }
+
+.titulo { display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
+h1 { font-family: var(--f-display); font-weight: 900; font-size: clamp(46px, 11vw, 118px); line-height: .86; letter-spacing: -.035em; text-transform: uppercase; }
+h1 .contorno { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+h1 .aurora-texto {
+  display: block; background: linear-gradient(90deg, var(--accent2), #5a3f78 55%, var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.vertical { writing-mode: vertical-rl; font-family: var(--f-mono); font-size: 11px; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; border-left: 1px solid var(--line); padding-left: 8px; }
+.estrella { width: 74px; height: 74px; flex: none; color: var(--warm); opacity: .9; animation: girar 40s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+
+.chips-portada { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-portada { display: inline-flex; gap: 6px; align-items: center; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; background: rgba(255,255,255,.75); backdrop-filter: blur(6px); }
+.chip-portada b { color: var(--accent); font-weight: 600; }
+
+.capas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.7); }
+.capa { padding: 14px 16px; display: grid; gap: 4px; position: relative; min-width: 0; }
+.capa + .capa { border-left: 1px solid var(--line); }
+.capa::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--c); }
+.capa-nombre { font-family: var(--f-display); font-weight: 700; font-size: 16px; }
+.capa p { margin: 0; color: var(--muted); font-size: 13px; }
+@media (max-width: 620px) {
+  .capas { grid-template-columns: 1fr; }
+  .capa + .capa { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cielo::after, .estrella { animation: none; }
+  .nieve { display: none; }
+}

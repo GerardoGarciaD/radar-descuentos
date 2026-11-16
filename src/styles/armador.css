@@ -1,0 +1,131 @@
+/* Armador de outfits: va entre la portada y el catálogo. */
+.armador { margin: 28px 0 8px; display: grid; gap: 16px; }
+.armador-cabeza { display: grid; gap: 4px; }
+.armador-cabeza h2 { font-family: var(--f-display); font-weight: 700; font-size: clamp(24px, 3.6vw, 34px); letter-spacing: -.02em; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow.violeta { color: var(--accent2); }
+
+/* Planes */
+.planes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.plan {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer; text-align: left; font-size: 14px; font-weight: 600;
+  transition: border-color .15s, background .15s;
+}
+.plan:hover { border-color: var(--muted); }
+.plan[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.plan svg { flex: none; }
+
+/* Cuerpo: explicación a la izquierda, outfit a la derecha */
+.armador-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; align-items: start; }
+.pide { position: sticky; top: 16px; display: grid; gap: 14px; padding: 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.pide p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink2); }
+.medidores { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.medidor { display: grid; gap: 6px; }
+.medidor > span { font-size: 12px; color: var(--muted); }
+.medidor strong { font-size: 13px; }
+.medidor-barras { display: flex; gap: 3px; }
+.medidor-barras i { flex: 1; height: 6px; border-radius: 3px; background: var(--line); }
+.medidor-barras i.lleno { background: var(--accent); }
+.listas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.listas h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.listas h3.si { color: var(--ok); }
+.listas h3.no { color: var(--red); }
+.listas ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14px; line-height: 1.4; }
+.listas ul li { padding-left: 14px; position: relative; }
+.listas ul li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .5; }
+
+.outfit { display: grid; gap: 12px; }
+.outfit-barra { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ejemplo { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px dashed var(--accent2); color: var(--accent2); }
+.outfit-barra strong { font-size: 18px; }
+.restablecer { margin-left: auto; border: 0; background: none; color: var(--accent); font-weight: 600; font-size: 13px; cursor: pointer; padding: 0; }
+
+/* Silueta: columna de zonas · figura · columna de zonas */
+.silueta {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(110px, 150px) minmax(0, 1fr);
+  gap: 8px; padding: 16px 12px; border-radius: 18px; border: 1px solid var(--line);
+  background: radial-gradient(60% 50% at 50% 40%, rgba(31,78,121,.10), transparent 70%), var(--surface);
+}
+.silueta-col { display: grid; grid-template-rows: repeat(5, minmax(56px, auto)); gap: 8px; align-content: space-between; }
+.silueta-col.izq { grid-column: 1; grid-row: 1; }
+.silueta-col.der { grid-column: 3; grid-row: 1; }
+.figura { grid-column: 2; grid-row: 1; position: relative; align-self: center; }
+.figura svg { display: block; width: 100%; height: auto; }
+.figura svg circle, .figura svg path { fill: #c9d1d6; }
+.figura svg path.piernas { fill: #b3bdc3; }
+.punto {
+  position: absolute; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--ink); color: var(--bg);
+}
+.punto.activo { background: var(--accent); box-shadow: 0 0 0 4px rgba(200,16,46,.2); }
+.punto.pendiente { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+.zona {
+  display: grid; gap: 2px; align-content: start; text-align: left; padding: 8px 10px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--bg); cursor: pointer; min-width: 0;
+}
+.zona:hover { border-color: var(--muted); }
+.zona.activa { border: 2px solid var(--accent); padding: 7px 9px; }
+.zona.pendiente { border-style: dashed; color: var(--muted); cursor: default; }
+.zona-et { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.zona.activa .zona-et { color: var(--accent); }
+.zona-prenda { font-size: 12.5px; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.zona.pendiente .zona-prenda { font-weight: 400; }
+.zona-precio { font-size: 11px; color: var(--muted); }
+
+/* Capas de la zona elegida */
+.capas-zona { display: grid; gap: 10px; }
+.capas-zona h3 { font-size: 16px; font-weight: 700; }
+.capas-zona ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.capas-zona li {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; grid-template-areas: "rol info precio" "rol acc acc";
+  gap: 4px 12px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--surface2); border: 1px solid var(--line);
+}
+.capas-zona li.vacia { background: transparent; border-style: dashed; }
+.capa-rol { grid-area: rol; align-self: start; padding-top: 2px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.capa-info { grid-area: info; display: grid; gap: 1px; min-width: 0; }
+.capa-info strong { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.capa-info span { font-size: 12px; color: var(--muted); }
+.capa-nota { color: var(--muted); font-weight: 500 !important; }
+.capa-precio { grid-area: precio; font-size: 14px; }
+.capa-acciones { grid-area: acc; display: flex; gap: 6px; padding-top: 4px; }
+.capa-acciones button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font-size: 13px; cursor: pointer; }
+.capa-acciones button:hover { border-color: var(--muted); }
+.consejo { margin: 0; padding: 12px 14px; border-radius: 14px; font-size: 14px; line-height: 1.5; color: var(--warm); background: rgba(122,91,46,.06); border: 1px dashed rgba(122,91,46,.35); }
+
+/* Selector de prenda */
+.selector { max-width: 620px; }
+.selector .hoja-cabeza h2 { font-family: var(--f-display); font-size: 19px; }
+.selector-ayuda { margin: -6px 0 12px; font-size: 13px; color: var(--muted); }
+.selector-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.selector-lista button {
+  width: 100%; display: flex; justify-content: space-between; gap: 12px; align-items: center; text-align: left;
+  padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface2); cursor: pointer;
+}
+.selector-lista button:hover { border-color: var(--muted); }
+.selector-lista button.elegida { border: 2px solid var(--accent); padding: 11px 13px; }
+.sel-info { display: grid; gap: 1px; min-width: 0; }
+.sel-info strong { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.sel-info span { font-size: 12px; color: var(--muted); }
+.sel-info .sel-actual { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.sel-der { display: grid; justify-items: end; gap: 4px; flex: none; }
+.sel-der .sello-v { margin: 0; }
+.selector-quitar { margin: 14px 0 calc(8px + env(safe-area-inset-bottom, 0px)); border: 0; background: none; color: var(--red); font-weight: 600; font-size: 14px; cursor: pointer; padding: 6px 0; }
+
+@media (max-width: 900px) {
+  .armador-cuerpo { grid-template-columns: 1fr; }
+  .pide { position: static; }
+}
+@media (max-width: 720px) {
+  .armador { margin-top: 22px; gap: 14px; }
+  .planes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan { padding: 10px 12px; font-size: 13px; }
+  .pide { padding: 14px; gap: 12px; }
+  .pide p { font-size: 14px; }
+  .listas ul { font-size: 13px; }
+  .silueta { grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr); padding: 12px 8px; gap: 6px; }
+  .zona { padding: 7px 8px; }
+  .zona.activa { padding: 6px 7px; }
+  .zona-prenda { font-size: 12px; }
+  .capas-zona li { grid-template-columns: 54px minmax(0, 1fr) auto; padding: 10px 12px; }
+}

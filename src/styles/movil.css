@@ -1,0 +1,105 @@
+/* Ajustes para celular. En escritorio solo se usan las reglas de .solo-movil y de las hojas. */
+.solo-movil { display: none; }
+
+/* Hoja de filtros (solo se abre en celular) */
+.hoja-filtros .hoja-in { max-width: 560px; display: flex; flex-direction: column; padding-bottom: 0; }
+.agarradera { width: 40px; height: 4px; border-radius: 999px; background: var(--line); margin: -6px auto 12px; }
+.hoja-filtros .hoja-cabeza h2 { font-family: var(--f-display); font-size: 20px; }
+.hoja-campos { display: grid; gap: 16px; padding-bottom: 16px; }
+.hoja-campos .campo select { width: 100%; min-width: 0; }
+.hoja-campos .rango { width: 100%; }
+.hoja-campos .rango input { flex: 1 1 0; width: 0; min-width: 0; }
+.hoja-campos .casillas { display: grid; gap: 12px; padding: 4px 0 0; }
+.hoja-pie { position: sticky; bottom: 0; background: var(--surface); padding: 12px 0 calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); display: flex; }
+.hoja-pie .ir { border: 0; cursor: pointer; padding: 13px; font-size: 15px; }
+
+@media (max-width: 720px) {
+  .solo-escritorio { display: none !important; }
+  .solo-movil { display: block; }
+
+  /* Portada más compacta, mismo ambiente */
+  .portada { padding-top: 26px; padding-bottom: 20px; }
+  .portada-in { gap: 14px; }
+  .refran em, .refran small { font-size: 12px; }
+  h1 { font-size: clamp(44px, 15.5vw, 66px); }
+  .estrella { width: 46px; height: 46px; }
+  .vertical { display: none; }
+  .chips-portada { gap: 6px; }
+  .chip-portada { font-size: 12px; padding: 5px 10px; }
+  .capas { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; }
+  .capa { padding: 12px 10px 10px; gap: 2px; }
+  .capa + .capa { border-left: 1px solid var(--line); border-top: 0; }
+  .capa .etiqueta-no { font-size: 9px; letter-spacing: .08em; }
+  .capa-nombre { font-size: 13px; line-height: 1.2; }
+  .capa p { display: none; }
+
+  /* Barra fija: categorías deslizables + Filtros y Ordenar */
+  .barra { padding-block: 10px; }
+  .movil-barra { display: grid; gap: 10px; }
+  .categorias.deslizable {
+    flex-wrap: nowrap; overflow-x: auto; padding: 0; gap: 6px;
+    scroll-snap-type: x proximity; scrollbar-width: none;
+    margin-right: calc(-1 * var(--gutter-r)); padding-right: var(--gutter-r);
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+  }
+  .categorias.deslizable::-webkit-scrollbar { display: none; }
+  .categorias.deslizable .categoria { flex: none; padding: 8px 12px; font-size: 13px; scroll-snap-align: start; }
+  .movil-fila { display: flex; align-items: center; gap: 8px; }
+  .btn-filtros { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .orden-movil {
+    appearance: none; padding: 8px 28px 8px 12px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; min-width: 0;
+    background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239fb1cc' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 11px center;
+  }
+  .movil-conteo { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  /* Introducción */
+  .intro { margin: 20px 0 16px; gap: 16px; }
+  .intro h2 { font-size: 24px; }
+  .intro-texto p { font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .intro-texto p.abierta { display: block; }
+  .leer-mas { display: inline-block; border: 0; background: none; color: var(--accent); font-weight: 600; font-size: 13px; padding: 4px 0 0; cursor: pointer; }
+  .mejores-fila {
+    display: flex; overflow-x: auto; gap: 10px; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-right: calc(-1 * var(--gutter-r)); padding-right: var(--gutter-r);
+  }
+  .mejores-fila::-webkit-scrollbar { display: none; }
+  .mejor { flex: 0 0 76%; scroll-snap-align: start; padding: 12px 14px; }
+
+  /* Tarjetas en formato de fila: figura a la izquierda, datos a la derecha */
+  .rejilla { grid-template-columns: 1fr; gap: 10px; }
+  .tarjeta { position: relative; display: grid; grid-template-columns: 92px minmax(0, 1fr); border-radius: 14px; }
+  .tarjeta:hover { transform: none; }
+  .arte { position: static; aspect-ratio: auto; border-right: 1px solid var(--line); }
+  .icono-prenda { width: 58%; }
+  .descuento { top: auto; bottom: 8px; left: 8px; font-size: 11px; padding: 3px 6px; }
+  .destacada { top: 8px; left: 8px; bottom: auto; width: 24px; height: 24px; padding: 0; display: grid; place-items: center; font-size: 12px; }
+  .destacada-txt { display: none; }
+  .favorito { top: 8px; right: 8px; width: 32px; height: 32px; font-size: 14px; }
+  .cuerpo { padding: 12px 12px 12px 14px; gap: 6px; }
+  .marca { padding-right: 36px; font-size: 11.5px; }
+  .tarjeta h3 { font-size: 15px; padding-right: 30px; }
+  .precio .ahora { font-size: 19px; }
+  .veredicto { font-size: 13px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .sello-v { font-size: 10px; }
+  .acciones { gap: 6px; padding-top: 4px; }
+  .ir { padding: 9px 8px; font-size: 13px; border-radius: 9px; }
+  .secundario { padding: 9px 10px; font-size: 13px; border-radius: 9px; }
+  .comparar { width: 38px; border-radius: 9px; font-size: 15px; }
+
+  /* Detalle como hoja casi a pantalla completa, con botones siempre visibles */
+  .hoja-in { max-height: 92vh; border-radius: 18px 18px 0 0; }
+  .detalle { padding-bottom: 0; }
+  .detalle h2 { font-size: 19px; }
+  .detalle .acciones { position: sticky; bottom: 0; background: var(--surface); padding: 12px 0 calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); margin: 0; }
+  .detalle .acciones .ir { padding: 12px; font-size: 14px; }
+
+  /* Comparar */
+  .bandeja { padding-top: 10px; }
+  .bandeja-texto { font-size: 13px; }
+  .bandeja button { padding: 9px 12px; }
+
+  .descartados { padding: 14px; }
+  .grupo ul { grid-template-columns: 1fr; }
+  .pie { font-size: 12px; align-items: flex-start; }
+}
