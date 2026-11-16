@@ -8,9 +8,7 @@ import Categorias from "./components/Categorias.jsx";
 import Filtros from "./components/Filtros.jsx";
 import IntroCategoria from "./components/IntroCategoria.jsx";
 import Tarjeta from "./components/Tarjeta.jsx";
-import Descartados from "./components/Descartados.jsx";
 import Aviso from "./components/Aviso.jsx";
-import EstrellaNordica from "./components/EstrellaNordica.jsx";
 import { BandejaComparar, HojaComparar } from "./components/Comparador.jsx";
 import Detalle from "./components/Detalle.jsx";
 import Armador from "./components/Armador.jsx";
@@ -144,16 +142,6 @@ export default function App() {
           </p>
         )}
       </section>
-
-      <Descartados lista={datos.descartados} />
-
-      <footer className="pie">
-        <EstrellaNordica className="pie-estrella" />
-        <span>
-          Precios verificados el {meta.actualizado}. Cambian a diario: confirma talla y color en la tienda antes de pagar.
-          El precio mostrado es el más bajo en la talla elegida.
-        </span>
-      </footer>
 
       <BandejaComparar cantidad={comparar.length} onLimpiar={() => setComparar([])} onAbrir={() => setHojaAbierta(true)} />
       {hojaAbierta && comparar.length > 0 && (

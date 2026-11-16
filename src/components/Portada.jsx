@@ -8,11 +8,6 @@ export default function Portada({ total }) {
       <div className="cielo" />
       <Nieve />
       <div className="portada-in">
-        <div className="refran">
-          <span className="etiqueta-no">Buscador de ofertas</span>
-          <em>{HERO.refran}</em>
-          <small>{HERO.traduccion}</small>
-        </div>
 
         <div className="titulo">
           <h1>
