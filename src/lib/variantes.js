@@ -12,6 +12,21 @@ export const GENEROS = [
 const TALLA_UNICA = "UNICA";
 const CALZADO = ["botas", "calcetines"];
 
+// Cupón, promoción y condiciones que algunas tiendas ponen a la oferta.
+const str = (v) => (typeof v === "string" ? v : "");
+function extrasOferta(p) {
+  const partes = [];
+  const c = p.cupon;
+  if (typeof c === "string") partes.push(`Cupón: ${c}.`);
+  else if (c?.codigo) partes.push(`Cupón ${c.codigo}${c.descuento_pct ? ` (${c.descuento_pct}% extra)` : ""}: ${str(c.condiciones)}${c.vence ? ` Vence ${c.vence}.` : ""}`);
+  const pr = p.promocion;
+  if (typeof pr === "string") partes.push(`Promoción: ${pr}.`);
+  else if (pr && typeof pr === "object") partes.push(`Promoción: ${pr.descuento_pct ? `${pr.descuento_pct}% extra al pagar` : ""}${pr.precio_estimado_al_pagar ? ` (≈ $${pr.precio_estimado_al_pagar})` : ""}. ${str(pr.condiciones)}`);
+  if (str(p.nota_precio)) partes.push(p.nota_precio);
+  if (str(p.condiciones_oferta)) partes.push(`Condiciones: ${p.condiciones_oferta}`);
+  return partes.length ? " " + partes.join(" ") : "";
+}
+
 // Tallas que aparecen en el catálogo, en orden.
 export function tallasDisponibles(productos) {
   const hay = new Set();
@@ -45,7 +60,7 @@ export function enTalla(p, talla) {
         ...p,
         descuento: p.precio_original > p.precio ? Math.round((1 - p.precio / p.precio_original) * 100) : 0,
         talla_m: "Tallas sin confirmar: revisa en la tienda",
-        disponibilidad: p.disponibilidad || "Tallas y existencias sin confirmar.",
+        disponibilidad: (p.disponibilidad || "Tallas y existencias sin confirmar.") + extrasOferta(p),
         variantesTalla: [],
       };
     }
@@ -62,6 +77,7 @@ export function enTalla(p, talla) {
   let disponibilidad = `${etiqueta}: en existencia en ${colores.join(", ")}.`;
   if (vence) disponibilidad += ` Oferta hasta ${vence}.`;
   if (p.aviso_precio) disponibilidad += ` ${p.aviso_precio}`;
+  disponibilidad += extrasOferta(p);
 
   return {
     ...p,
