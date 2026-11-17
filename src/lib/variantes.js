@@ -10,6 +10,7 @@ export const GENEROS = [
 ];
 
 const TALLA_UNICA = "UNICA";
+const CALZADO = ["botas", "calcetines"];
 
 // Tallas que aparecen en el catálogo, en orden.
 export function tallasDisponibles(productos) {
@@ -29,14 +30,27 @@ export function enTalla(p, talla) {
   if (variantes[TALLA_UNICA]) {
     lista = variantes[TALLA_UNICA];
     etiqueta = "Talla única";
-  } else if (talla === "todas") {
+  } else if (talla === "todas" || CALZADO.includes(p.categoria)) {
+    // El calzado usa su propia talla: se muestran todas.
     lista = Object.values(variantes).flat();
-    etiqueta = "Todas las tallas";
+    etiqueta = CALZADO.includes(p.categoria) ? "Tallas de calzado" : "Todas las tallas";
   } else {
     lista = variantes[talla];
     etiqueta = `Talla ${talla}`;
   }
-  if (!lista || !lista.length) return null;
+  if (!lista || !lista.length) {
+    // Producto sin tallas confirmadas: solo se muestra con "Todas", y avisando.
+    if (talla === "todas" && !Object.keys(variantes).length && p.precio) {
+      return {
+        ...p,
+        descuento: p.precio_original > p.precio ? Math.round((1 - p.precio / p.precio_original) * 100) : 0,
+        talla_m: "Tallas sin confirmar: revisa en la tienda",
+        disponibilidad: p.disponibilidad || "Tallas y existencias sin confirmar.",
+        variantesTalla: [],
+      };
+    }
+    return null;
+  }
 
   // La opción más barata de esa talla es la que se muestra y a la que lleva el botón.
   const mejor = [...lista].sort((a, b) => a.precio - b.precio)[0];
@@ -66,4 +80,9 @@ export function enTalla(p, talla) {
 }
 
 // Producto por talla: ¿en qué tallas existe? (para el detalle)
-export const tallasDe = (p) => ORDEN_TALLAS.filter((t) => p.variantes?.[t]?.length).concat(p.variantes?.[TALLA_UNICA] ? ["Única"] : []);
+export const tallasDe = (p) => {
+  const claves = Object.keys(p.variantes || {});
+  const ropa = ORDEN_TALLAS.filter((t) => p.variantes[t]?.length);
+  const otras = claves.filter((t) => !ORDEN_TALLAS.includes(t) && t !== TALLA_UNICA).sort((a, b) => parseFloat(a) - parseFloat(b));
+  return [...ropa, ...otras, ...(p.variantes?.[TALLA_UNICA] ? ["Única"] : [])];
+};

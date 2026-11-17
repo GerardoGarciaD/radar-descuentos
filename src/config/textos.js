@@ -60,6 +60,7 @@ export const NOMBRE_CORTO = {
   pantalones: "Pantalones",
   guantes: "Guantes",
   accesorios: "Gorros y cuellos",
+  snowsuit: "Snowsuit",
   botas: "Botas",
   calcetines: "Calcetines",
 };

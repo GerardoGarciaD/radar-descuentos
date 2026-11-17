@@ -65,6 +65,13 @@ const FIGURAS = {
       <path d="M34 52l4-4 4 4-4 4zM46 46l4-4 4 4-4 4zM58 52l4-4 4 4-4 4z" fill={OSCURO} opacity=".5" />
     </>
   ),
+  snowsuit: (
+    <>
+      <circle cx="50" cy="12" r="8" fill="currentColor" />
+      <path d="M34 24h32l12 8 6 30-10 3-6-22v22l6 44H58l-8-38-8 38H28l6-44V43l-6 22-10-3 6-30z" fill="currentColor" />
+      <path d="M50 26v40M34 56h32" stroke={OSCURO} strokeWidth="2.5" fill="none" />
+    </>
+  ),
   botas: (
     <>
       <path d="M30 10h28v56l28 14v20H22V72z" fill="currentColor" />
