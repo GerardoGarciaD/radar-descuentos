@@ -10,7 +10,7 @@ export const HERO = {
   chips: [
     { texto: "Para", fuerte: "mujer y hombre" },
     { texto: "Tallas", fuerte: "XS a 3XL" },
-    { texto: "Tiendas revisadas:", fuerte: "33" },
+    { texto: "Tiendas revisadas:", fuerte: "40" },
     { texto: "Precios de", fuerte: "hoy" },
   ],
 };

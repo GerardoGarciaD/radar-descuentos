@@ -24,6 +24,7 @@ function extrasOferta(p) {
   else if (pr && typeof pr === "object") partes.push(`Promoción: ${pr.descuento_pct ? `${pr.descuento_pct}% extra al pagar` : ""}${pr.precio_estimado_al_pagar ? ` (≈ $${pr.precio_estimado_al_pagar})` : ""}. ${str(pr.condiciones)}`);
   if (str(p.nota_precio)) partes.push(p.nota_precio);
   if (str(p.condiciones_oferta)) partes.push(`Condiciones: ${p.condiciones_oferta}`);
+  if (str(p.estado_oferta)) partes.push(`Estado de la oferta: ${p.estado_oferta}.`);
   return partes.length ? " " + partes.join(" ") : "";
 }
 
